@@ -1,19 +1,22 @@
-namespace RefactorThis.Persistence {
+using RefactorThis.Domain;
+
+namespace RefactorThis.Persistence
+{
 	public class InvoiceRepository
 	{
 		private Invoice _invoice;
 
-		public Invoice GetInvoice( string reference )
+		public Invoice GetInvoice(string reference)
 		{
 			return _invoice;
 		}
 
-		public void SaveInvoice( Invoice invoice )
+		public void SaveInvoice(Invoice invoice)
 		{
 			//saves the invoice to the database
 		}
 
-		public void Add( Invoice invoice )
+		public void Add(Invoice invoice)
 		{
 			_invoice = invoice;
 		}

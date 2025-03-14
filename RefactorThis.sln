@@ -1,10 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Domain", "RefactorThis.Domain\RefactorThis.Domain.csproj", "{5310B2FE-E26D-414E-B656-1F74C5A70368}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Domain.Tests", "RefactorThis.Domain.Tests\RefactorThis.Domain.Tests.csproj", "{7971BDEC-EAD1-4FB8-A4F5-B1F67E4F6355}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Persistence", "RefactorThis.Persistence\RefactorThis.Persistence.csproj", "{50F3F93C-6688-4B4B-8B30-3BDF6FA4485F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Services", "RefactorThis.Services\RefactorThis.Services.csproj", "{1E1AF131-B808-42E5-BAFF-B4ACC615ACB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +27,10 @@ Global
 		{50F3F93C-6688-4B4B-8B30-3BDF6FA4485F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50F3F93C-6688-4B4B-8B30-3BDF6FA4485F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50F3F93C-6688-4B4B-8B30-3BDF6FA4485F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E1AF131-B808-42E5-BAFF-B4ACC615ACB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E1AF131-B808-42E5-BAFF-B4ACC615ACB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E1AF131-B808-42E5-BAFF-B4ACC615ACB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E1AF131-B808-42E5-BAFF-B4ACC615ACB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
