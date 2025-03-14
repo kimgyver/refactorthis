@@ -3,11 +3,11 @@ using RefactorThis.Persistence;
 
 namespace RefactorThis.Services
 {
-	public class InvoiceService
+	public class InvoiceService : IInvoiceService
 	{
-		private readonly InvoiceRepository _invoiceRepository;
+		private readonly IInvoiceRepository _invoiceRepository;
 
-		public InvoiceService(InvoiceRepository invoiceRepository)
+		public InvoiceService(IInvoiceRepository invoiceRepository)
 		{
 			_invoiceRepository = invoiceRepository;
 		}

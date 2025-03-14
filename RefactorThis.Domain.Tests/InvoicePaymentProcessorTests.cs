@@ -2,19 +2,30 @@
 using RefactorThis.Domain;
 using RefactorThis.Persistence;
 using RefactorThis.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RefactorThis.Domain.Tests
 {
 	[TestFixture]
 	public class InvoicePaymentProcessorTests
 	{
+		private IServiceProvider _serviceProvider;
+
+		[SetUp]
+		public void Setup()
+		{
+			var services = new ServiceCollection();
+			services.AddApplicationServices(); // Register all dependencies
+			_serviceProvider = services.BuildServiceProvider();
+		}
+
 		[Test]
 		public void ProcessPayment_Should_ThrowException_When_NoInoiceFoundForPaymentReference()
 		{
-			var repo = new InvoiceRepository();
+			var repo = _serviceProvider.GetRequiredService<IInvoiceRepository>();
 
 			Invoice invoice = null;
-			var paymentProcessor = new InvoiceService(repo);
+			var paymentProcessor = _serviceProvider.GetRequiredService<IInvoiceService>();
 
 			var payment = new Payment();
 			var failureMessage = "";
@@ -34,7 +45,7 @@ namespace RefactorThis.Domain.Tests
 		[Test]
 		public void ProcessPayment_Should_ReturnFailureMessage_When_NoPaymentNeeded()
 		{
-			var repo = new InvoiceRepository();
+			var repo = _serviceProvider.GetRequiredService<IInvoiceRepository>();
 
 			var invoice = new Invoice()
 			{
@@ -45,7 +56,7 @@ namespace RefactorThis.Domain.Tests
 
 			repo.Add(invoice);
 
-			var paymentProcessor = new InvoiceService(repo);
+			var paymentProcessor = _serviceProvider.GetRequiredService<IInvoiceService>();
 
 			var payment = new Payment();
 
@@ -57,7 +68,7 @@ namespace RefactorThis.Domain.Tests
 		[Test]
 		public void ProcessPayment_Should_ReturnFailureMessage_When_InvoiceAlreadyFullyPaid()
 		{
-			var repo = new InvoiceRepository();
+			var repo = _serviceProvider.GetRequiredService<IInvoiceRepository>();
 
 			var invoice = new Invoice()
 			{
@@ -73,7 +84,7 @@ namespace RefactorThis.Domain.Tests
 			};
 			repo.Add(invoice);
 
-			var paymentProcessor = new InvoiceService(repo);
+			var paymentProcessor = _serviceProvider.GetRequiredService<IInvoiceService>();
 
 			var payment = new Payment();
 
@@ -85,7 +96,7 @@ namespace RefactorThis.Domain.Tests
 		[Test]
 		public void ProcessPayment_Should_ReturnFailureMessage_When_PartialPaymentExistsAndAmountPaidExceedsAmountDue()
 		{
-			var repo = new InvoiceRepository();
+			var repo = _serviceProvider.GetRequiredService<IInvoiceRepository>();
 			var invoice = new Invoice()
 			{
 				Amount = 10,
@@ -100,7 +111,7 @@ namespace RefactorThis.Domain.Tests
 			};
 			repo.Add(invoice);
 
-			var paymentProcessor = new InvoiceService(repo);
+			var paymentProcessor = _serviceProvider.GetRequiredService<IInvoiceService>();
 
 			var payment = new Payment()
 			{
@@ -115,7 +126,7 @@ namespace RefactorThis.Domain.Tests
 		[Test]
 		public void ProcessPayment_Should_ReturnFailureMessage_When_NoPartialPaymentExistsAndAmountPaidExceedsInvoiceAmount()
 		{
-			var repo = new InvoiceRepository();
+			var repo = _serviceProvider.GetRequiredService<IInvoiceRepository>();
 			var invoice = new Invoice()
 			{
 				Amount = 5,
@@ -124,7 +135,7 @@ namespace RefactorThis.Domain.Tests
 			};
 			repo.Add(invoice);
 
-			var paymentProcessor = new InvoiceService(repo);
+			var paymentProcessor = _serviceProvider.GetRequiredService<IInvoiceService>();
 
 			var payment = new Payment()
 			{
@@ -139,7 +150,7 @@ namespace RefactorThis.Domain.Tests
 		[Test]
 		public void ProcessPayment_Should_ReturnFullyPaidMessage_When_PartialPaymentExistsAndAmountPaidEqualsAmountDue()
 		{
-			var repo = new InvoiceRepository();
+			var repo = _serviceProvider.GetRequiredService<IInvoiceRepository>();
 			var invoice = new Invoice()
 			{
 				Amount = 10,
@@ -154,7 +165,7 @@ namespace RefactorThis.Domain.Tests
 			};
 			repo.Add(invoice);
 
-			var paymentProcessor = new InvoiceService(repo);
+			var paymentProcessor = _serviceProvider.GetRequiredService<IInvoiceService>();
 
 			var payment = new Payment()
 			{
@@ -169,7 +180,7 @@ namespace RefactorThis.Domain.Tests
 		[Test]
 		public void ProcessPayment_Should_ReturnFullyPaidMessage_When_NoPartialPaymentExistsAndAmountPaidEqualsInvoiceAmount()
 		{
-			var repo = new InvoiceRepository();
+			var repo = _serviceProvider.GetRequiredService<IInvoiceRepository>();
 			var invoice = new Invoice()
 			{
 				Amount = 10,
@@ -178,7 +189,7 @@ namespace RefactorThis.Domain.Tests
 			};
 			repo.Add(invoice);
 
-			var paymentProcessor = new InvoiceService(repo);
+			var paymentProcessor = _serviceProvider.GetRequiredService<IInvoiceService>();
 
 			var payment = new Payment()
 			{
@@ -193,7 +204,7 @@ namespace RefactorThis.Domain.Tests
 		[Test]
 		public void ProcessPayment_Should_ReturnPartiallyPaidMessage_When_PartialPaymentExistsAndAmountPaidIsLessThanAmountDue()
 		{
-			var repo = new InvoiceRepository();
+			var repo = _serviceProvider.GetRequiredService<IInvoiceRepository>();
 			var invoice = new Invoice()
 			{
 				Amount = 10,
@@ -208,7 +219,7 @@ namespace RefactorThis.Domain.Tests
 			};
 			repo.Add(invoice);
 
-			var paymentProcessor = new InvoiceService(repo);
+			var paymentProcessor = _serviceProvider.GetRequiredService<IInvoiceService>();
 
 			var payment = new Payment()
 			{
@@ -223,7 +234,7 @@ namespace RefactorThis.Domain.Tests
 		[Test]
 		public void ProcessPayment_Should_ReturnPartiallyPaidMessage_When_NoPartialPaymentExistsAndAmountPaidIsLessThanInvoiceAmount()
 		{
-			var repo = new InvoiceRepository();
+			var repo = _serviceProvider.GetRequiredService<IInvoiceRepository>();
 			var invoice = new Invoice()
 			{
 				Amount = 10,
@@ -232,7 +243,7 @@ namespace RefactorThis.Domain.Tests
 			};
 			repo.Add(invoice);
 
-			var paymentProcessor = new InvoiceService(repo);
+			var paymentProcessor = _serviceProvider.GetRequiredService<IInvoiceService>();
 
 			var payment = new Payment()
 			{

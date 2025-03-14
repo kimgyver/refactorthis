@@ -38,6 +38,15 @@ The overall objective is to refactor the code and keep the tests passing. There 
 - Encapsulate State Changes
   . Implemented ApplyPayment() in Invoice, allowing the invoice to update its own state
 
+## Dependency injection
+
+Uses dependency injection (DI) to manage dependencies efficiently
+
+| Interface            | Implementation      | Layer             |
+| -------------------- | ------------------- | ----------------- |
+| `IInvoiceService`    | `InvoiceService`    | Service Layer     |
+| `IInvoiceRepository` | `InvoiceRepository` | Persistence Layer |
+
 ## Testing
 
 - Preserve the existing test logic.
