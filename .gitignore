@@ -1,5 +1,30 @@
+# .NET Build Files
 bin/
 obj/
-/packages/
-riderModule.iml
-/_ReSharper.Caches/
+
+# User-specific Files
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs & Generated Files
+*.log
+*.tlog
+*.cache
+*.pdb
+
+# NuGet Packages
+*.nupkg
+packages/
+project.lock.json
+project.assets.json
+
+# Entity Framework Migrations
+Migrations/
+
+# SQLite Database
+*.db
+*.db-shm
+*.db
