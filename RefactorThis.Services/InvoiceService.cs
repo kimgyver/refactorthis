@@ -43,7 +43,7 @@ namespace RefactorThis.Services
 		}
 
 		private bool IsNoPaymentNeeded(Invoice invoice) =>
-				invoice.Amount == 0 && (invoice.Payments == null || !invoice.Payments.Any());
+				invoice.Amount == 0 && !(invoice.Payments?.Any() ?? false);
 
 		private bool IsInvoiceInInvalidState(Invoice invoice) =>
 				invoice.Amount == 0 && invoice.Payments?.Any() == true;
